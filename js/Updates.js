@@ -8,7 +8,6 @@
 		// Bibilotheken
 		this.request = require( 'request' );
 		this.electron = require( 'electron' );
-		this.compareVersions = require('compare-versions');
 		this.storage = require('electron-json-storage');
 
 		this.package_json_url = 'https://api.github.com/repos/kimb-technologies/KIMB-Notes-Desktop/contents/package.json';
@@ -81,13 +80,11 @@
 				//Antwort parsen
 				body = JSON.parse( body );
 				//base64 to ASCII
-				var package_json = new Buffer(body.content, 'base64').toString('ascii');
+				var package_json = Buffer.from(body.content, 'base64').toString();
 				//aktuelle Package JSON parsen
 				package_json = JSON.parse( package_json );
-				var onlineVersion =  package_json.version;
-				
-				//vergleichen
-				THIS.hasUpdate = THIS.compareVersions( THIS.electron.app.getVersion(), onlineVersion) < 0;
+
+				THIS.hasUpdate = THIS.compareVersions(THIS.electron.app.getVersion(), package_json.version );
 
 				//Daten speichern
 				THIS.storage.set('Updates', { requestTime : Date.now(), hasUpdate : THIS.hasUpdate  }, function(error) {
@@ -122,5 +119,27 @@
 				}
 			});
 		}
+	}
+
+	/**
+	 * Returns true if version string (three parts diveded by .)
+	 * 'online' ist higher than 'sys'
+	 */
+	compareVersions( sys, online ){
+		//prefixes like v removed
+		online = online.replace( /[^0-9\.]/i, '' );
+		sys = sys.replace( /[^0-9\.]/i, '' );
+		//split to 3 ints
+		online = online.split('.');
+		sys = sys.split('.');
+		//parse int strings to numbers
+		online = online.map( (s) => parseInt(s) );
+		sys = sys.map( (s) => parseInt(s) );
+
+		console.log( sys, online );
+
+		return ( online[0] > sys[0] ) ||
+			( online[0] == sys[0] && online[1] > sys[1] ) ||
+			( online[0] == sys[0] && online[1] == sys[1] && online[2] > sys[2] );
 	}
 }
