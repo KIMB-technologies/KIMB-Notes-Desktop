@@ -1,10 +1,14 @@
 {
-  "name": "kimb-notes-desktop",
-  "version": "1.0.0",
-  "description": "A desktop application for KIMB-Notes server.",
+  "name": "KIMB-Notes-Desktop",
+  "version": "1.1.0",
+  "description": "A desktop application for KIMB-Notes Server.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-mac": "electron-packager ./  --ignore=node_modules/wine-darwin --platform=darwin --arch=x64 --asar --icon=./assets/icons/mac/notes.icns --prune=true --out=./application/",
+    "create-dmg": "electron-installer-dmg ./application/KIMB-Notes-Desktop-darwin-x64/KIMB-Notes-Desktop.app KIMB-Notes-Desktop-mac-x64",
+    "package-win": "electron-packager ./  --ignore=node_modules/wine-darwin --platform=win32 --arch=x64 --asar --icon=./assets/icons/win/notes.ico --prune=true --out=./application/",
+    "package-linux": "electron-packager ./  --ignore=node_modules/wine-darwin --platform=linux --arch=x64 --asar --icon=./assets/icons/png/128x128.png --prune=true --out=./application/"
   },
   "repository": "https://github.com/kimb-technologies/KIMB-Notes-Desktop",
   "keywords": [
@@ -16,18 +20,18 @@
   "author": "kimbtech",
   "license": "GPL-3.0",
   "devDependencies": {
-    "electron": "~1.7.8",
-    "electron-installer-dmg": "^0.2.1",
-    "electron-packager": "^9.1.0"
+    "electron": "latest",
+    "electron-installer-dmg": "latest",
+    "electron-packager": "latest"
   },
   "dependencies": {
-    "about-window": "^1.8.0",
-    "compare-versions": "^3.1.0",
-    "electron-json-storage": "^3.1.1",
-    "electron-window-position": "^1.0.0",
-    "jquery": "^3.2.1",
-    "request": "^2.83.0",
-    "sjcl": "^1.0.7",
-    "valid-url": "^1.0.9"
+    "about-window": "latest",
+    "compare-versions": "latest",
+    "electron-json-storage": "latest",
+    "electron-window-position": "latest",
+    "jquery": "latest",
+    "request": "latest",
+    "sjcl": "latest",
+    "valid-url": "latest"
   }
 }

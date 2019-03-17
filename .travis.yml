@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+- "7"
+
+os: osx
+
+branches:
+  only:
+  - master
+
+sudo: required
+
+env:
+  global:
+    # prevent wine popup dialogs about installing additional packages
+    - WINEDLLOVERRIDES="mscoree,mshtml="
+
+before_deploy: bash build.sh
+
+deploy:
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file:
+      - "application/KIMB-Notes-Desktop-win32-x64.zip"
+      - "application/KIMB-Notes-Desktop-linux-x64.zip"
+      - "KIMB-Notes-Desktop-mac-x64.dmg"
+    skip_cleanup: true
+    on:
+      branch: master
