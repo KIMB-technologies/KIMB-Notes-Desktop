@@ -24,6 +24,14 @@ const BildschirmPosition = require( 'electron-window-position' );
 //globale Referenz auf das Febster, damit es nicht vom Garbage Collector gefressen wird
 let mainWindow;
 
+let quitokval = false;
+function quitok(v){
+	if( typeof v !== "undefined" ){
+		quitokval = v;
+	}
+	return quitokval;
+}
+
 function createWindow () {
 	// Fenster soll oben links im Fenster geöffnet werden
 	var windowPos = new BildschirmPosition().getActiveScreenCenter( 900, 700 );
@@ -49,18 +57,33 @@ function createWindow () {
 		mainWindow.show();
 	});
 	
-	// Fenster geschlossen?
-  	mainWindow.on('closed', function () {
-		// Fenster kann weg
-		mainWindow = null
+	// Fenster schliessen => verbergen?
+  	mainWindow.on('close', function (event) {
+		if(!quitok()){
+			event.preventDefault();
+			// Fenster ausblenden
+			mainWindow.hide();
+		}
+	});
+	//alles zu => ende
+	mainWindow.on('closed', function (event) {
+		mainWindow = null;
+	});
+	//minimieren in Tray
+	mainWindow.on('minimize',function(event){
+		event.preventDefault();
+		mainWindow.hide();
 	});
 
 	//Menü laden
   	electron.Menu.setApplicationMenu(
 		electron.Menu.buildFromTemplate(
-			require('./js/menue.js')
+			require('./js/menue.js')(quitok)
 		)
 	);
+
+	//Tray
+	require( './js/tray.js')( mainWindow, quitok );
 }
 // Fenster erst erstellen, wenn electron vollständig geladen ist
 electron.app.on('ready', createWindow);

@@ -25,6 +25,7 @@ deploy:
       - "application/KIMB-Notes-Desktop-win32-x64.zip"
       - "application/KIMB-Notes-Desktop-linux-x64.zip"
       - "KIMB-Notes-Desktop-mac-x64.dmg"
+      - "application/KIMB-Notes-Desktop-linux-x64/resources/app.asar"
     skip_cleanup: true
     on:
       branch: master
