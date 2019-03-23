@@ -32,9 +32,19 @@
 				//Daten lesen
 				THIS.storage.get( 'Updates' , function(error, data) {
 					if (error){ throw error; }
+
+					var versionchange = true;
+					if( data.hasOwnProperty( 'thisVersion' ) ){
+						var versionchange = data.thisVersion != THIS.electron.app.getVersion();
+					}
 					
 					// Anfrage älter als 24 h?
-					if( data.requestTime + 86400000 < Date.now() ){
+					// Oder fuer andere Version
+					if(
+							data.requestTime + 86400000 < Date.now()
+						||
+							versionchange
+					){
 						//neu fragen
 						THIS.githubAPIrequest();
 					}
@@ -87,7 +97,7 @@
 				THIS.hasUpdate = THIS.compareVersions(THIS.electron.app.getVersion(), package_json.version );
 
 				//Daten speichern
-				THIS.storage.set('Updates', { requestTime : Date.now(), hasUpdate : THIS.hasUpdate  }, function(error) {
+				THIS.storage.set('Updates', { requestTime : Date.now(), hasUpdate : THIS.hasUpdate, thisVersion : THIS.electron.app.getVersion() }, function(error) {
 					if (error){ throw error; }
 				});
 
@@ -135,8 +145,6 @@
 		//parse int strings to numbers
 		online = online.map( (s) => parseInt(s) );
 		sys = sys.map( (s) => parseInt(s) );
-
-		console.log( sys, online );
 
 		return ( online[0] > sys[0] ) ||
 			( online[0] == sys[0] && online[1] > sys[1] ) ||
