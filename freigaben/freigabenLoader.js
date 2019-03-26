@@ -98,20 +98,12 @@ function deleteFreigabe( time ){
 //Öffnen
 function openFreigabe( link ){
 	openWebView( link, ( webview ) => {
-		
-		var css = 'body { background: #f5f5f5; } '
-			+ 'div.main { border: none; box-shadow: none; } '
-			+ 'h1 { display:none; }'
-			+ 'div.footer a { color: black } ';
-
 		webview.executeJavaScript( ' $("button#closenote").unbind("click").click( function () { window.open("file://dont-open/")  } ); ' );
-		webview.executeJavaScript( ' $("head").append( "<style>' + css + ' )</style>" );' );
-
+		webview.executeJavaScript( ' displayAsApp(); $("h1").hide(); ' );
 		webview.addEventListener('new-window', (event, url) => {
 			if( event.url == 'file://dont-open/' ){
 				location.reload();
 			}
 		});
-		
 	});
 }

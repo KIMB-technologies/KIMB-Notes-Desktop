@@ -233,15 +233,7 @@ function mainLoginManager(){
 		//using webview and authcode
 		var url = userdata.server + '/' + '#' + userdata.username + ':' + userdata.authcode;
 		openWebView( url, ( webview ) => {
-			var css = 'div.logout button#logout{ display: none !important; }'
-				+ 'div.logout span.small{ display: none !important; } '
-				+ 'div.logout{ height : 26px !important; width : 48px !important; position: initial; } '
-				+ 'body { background: #f5f5f5; } '
-				+ 'div.main { border: none; box-shadow: none; } '
-				+ 'h1, div.footer { display:none; }';
-
-			webview.executeJavaScript( ' $("div.logout").removeClass("box"); ' );
-			webview.executeJavaScript( ' $("head").append( "<style>' + css + ' )</style>" );' );
+			webview.executeJavaScript( ' displayAsApp(); $("h1").hide(); ' );
 		});
 	}
 
