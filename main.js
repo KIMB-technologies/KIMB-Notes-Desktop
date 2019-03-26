@@ -22,7 +22,7 @@ const BildschirmPosition = require( 'electron-window-position' );
 // ****
 
 //globale Referenz auf das Febster, damit es nicht vom Garbage Collector gefressen wird
-let mainWindow;
+let mainWindow, mainTray = null;
 
 let quitokval = false;
 function quitok(v){
@@ -46,7 +46,11 @@ function createWindow () {
 		minHeight: 500,
 		icon: __dirname + '/assets/icons/png/64x64.png',
 		backgroundColor: '#f5f5f5',
-		show: false
+		show: false,
+		webPreferences : {
+			nodeIntegration: true,
+			webviewTag: true
+		}
 	});
 
 	//Haupdatei laden
@@ -69,11 +73,6 @@ function createWindow () {
 	mainWindow.on('closed', function (event) {
 		mainWindow = null;
 	});
-	//minimieren in Tray
-	mainWindow.on('minimize',function(event){
-		event.preventDefault();
-		mainWindow.hide();
-	});
 
 	//Menü laden
   	electron.Menu.setApplicationMenu(
@@ -82,8 +81,10 @@ function createWindow () {
 		)
 	);
 
-	//Tray
-	require( './js/tray.js')( mainWindow, quitok );
+	if( mainTray === null ){
+		//Tray
+		mainTray = require( './js/tray.js')( mainWindow, quitok, createWindow );
+	}
 }
 // Fenster erst erstellen, wenn electron vollständig geladen ist
 electron.app.on('ready', createWindow);

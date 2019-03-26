@@ -88,8 +88,9 @@ module.exports = {
 	},
 	//Freigaben Menübutton
 	"freigabenDialog" : function(){
+		mainWindow = electron.BrowserWindow.getFocusedWindow();
 		//freigaben.js laden
-		require( __dirname + '/../freigaben/freigaben.js' )();
+		require( __dirname + '/../freigaben/freigaben.js' )( mainWindow );
 	},
 	//Freigaben Menübutton
 	"webviewDevtools" : function(){

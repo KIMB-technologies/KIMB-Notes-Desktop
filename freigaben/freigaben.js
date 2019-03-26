@@ -19,7 +19,7 @@ const BildschirmPosition = require( 'electron-window-position' );
 //globale Referenz auf das Febster, damit es nicht vom Garbage Collector gefressen wird
 let freigWindow;
 
-function createWindow () {
+function createWindow ( parent ) {
 	// Fenster soll oben links im Fenster geöffnet werden
 	var windowPos = new BildschirmPosition().getActiveScreenCenter( 500, 500 );
 
@@ -33,7 +33,13 @@ function createWindow () {
 		minHeight: 300,
 		icon: __dirname + '/../assets/icons/png/64x64.png',
 		backgroundColor: '#f5f5f5',
-		show: false
+		show: false,
+		autoHideMenuBar: true,
+		parent: parent,
+		webPreferences : {
+			nodeIntegration: true,
+			webviewTag: true
+		}
 	});
 
 	//Haupdatei laden
