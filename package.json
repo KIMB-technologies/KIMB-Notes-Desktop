@@ -1,6 +1,6 @@
 {
   "name": "KIMB-Notes-Desktop",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A desktop application for KIMB-Notes Server.",
   "main": "main.js",
   "scripts": {
