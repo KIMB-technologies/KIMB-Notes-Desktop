@@ -5,7 +5,7 @@ npm install wine-darwin
 # Setup ~/.wine by running a command
 ./node_modules/.bin/wine hostnamene
 
-npm install electron
+npm install
 
 npm run package-win
 zip -r -9 application/KIMB-Notes-Desktop-win32-x64.zip application/KIMB-Notes-Desktop-win32-x64
