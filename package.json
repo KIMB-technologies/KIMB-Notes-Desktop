@@ -1,6 +1,6 @@
 {
   "name": "KIMB-Notes-Desktop",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A desktop application for KIMB-Notes Server.",
   "main": "main.js",
   "scripts": {
@@ -21,11 +21,11 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "electron": "latest",
-    "electron-installer-dmg": "latest",
-    "electron-packager": "latest"
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^14.0.2"
   },
   "dependencies": {
-    "about-window": "latest",
+    "about-window": "^1.13.1",
     "electron-is-running-in-asar": "^1.0.0",
     "electron-json-storage": "latest",
     "electron-window-position": "latest",
