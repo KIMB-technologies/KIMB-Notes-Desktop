@@ -27,7 +27,7 @@ module.exports = function(quitok){
 					click: () => openAboutWindow({
 						icon_path: __dirname + '/../assets/icons/png/128x128.png',
 						bug_report_url : 'https://github.com/kimb-technologies/KIMB-Notes-Desktop/issues',
-						copyright: 'copyright by KIMB-technologies 2017, distributed under terms of GPLv3',
+						copyright: 'copyright by KIMB-technologies 2017 - 2020, distributed under terms of GPLv3',
 						homepage: 'https://github.com/kimb-technologies/KIMB-Notes-Desktop',
 						description: 'A desktop application for KIMB-Notes server.',
 						license: 'GPL-3.0',
@@ -69,7 +69,7 @@ module.exports = function(quitok){
 							click: () => openAboutWindow({
 								icon_path: __dirname + '/../assets/icons/png/128x128.png',
 								bug_report_url : 'https://github.com/kimb-technologies/KIMB-Notes-Desktop/issues',
-								copyright: 'copyright by KIMB-technologies 2017, distributed under terms of GPLv3',
+								copyright: 'copyright by KIMB-technologies 2017 - 2020, distributed under terms of GPLv3',
 								homepage: 'https://github.com/kimb-technologies/KIMB-Notes-Desktop',
 								description: 'A desktop application for KIMB-Notes server.',
 								license: 'GPL-3.0',
