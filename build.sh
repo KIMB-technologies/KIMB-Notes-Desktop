@@ -5,7 +5,9 @@ npm install
 if [ "$TRAVIS_OS_NAME" = "linux" ]; then
 
 	# Install wine to run package-win
-	sudo apt-get install wine-stable 
+	sudo apt-get update
+	sudo apt-get -y install wine
+	
 	# Setup ~/.wine by running a command
 	wine hostnamene
 
