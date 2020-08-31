@@ -16,15 +16,16 @@ module.exports = {
 	"logUserOut" : function (){
 		mainWindow = electron.BrowserWindow.getFocusedWindow();
 		//Wiklich ausloggen?
-		dialog.showMessageBox(
-			{ type: 'info', buttons: ['Ja', 'Nein'], message: 'Wollen Sie sich wirklich ausloggen?' },
-			function (buttonIndex) {
-				if( buttonIndex === 0 ){
+		dialog.showMessageBox({ 
+				type: 'info',
+				buttons: ['Ja', 'Nein'],
+				message: 'Wollen Sie sich wirklich ausloggen?'
+			}).then(res => {
+				if (res.response === 0) {
 					//Authcode löschen, dann Fenster neu laden
 					mainWindow.webContents.send( 'delete-authcode' );
 				}
-			}
-		);
+			});
 	},
 	//Userdaten löschen, Fenster neu laden
 	"deleteUserData" : function () {

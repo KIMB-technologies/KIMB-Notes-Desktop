@@ -98,8 +98,8 @@ function deleteFreigabe( time ){
 //Öffnen
 function openFreigabe( link ){
 	openWebView( link, ( webview ) => {
-		webview.executeJavaScript( ' $("button#closenote").unbind("click").click( function () { window.open("file://dont-open/")  } ); ' );
-		webview.executeJavaScript( ' displayAsApp(); $("h1").hide(); ' );
+		webview.executeJavaScript( '{ $("button#closenote").unbind("click").click( function () { window.open("file://dont-open/")  } ); }' );
+		webview.executeJavaScript( '{ displayAsApp(); $("h1").hide(); }' );
 		webview.addEventListener('new-window', (event, url) => {
 			if( event.url == 'file://dont-open/' ){
 				location.reload();

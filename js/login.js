@@ -9,7 +9,8 @@ const electron = require( 'electron' );
 	//	Für die IPC Messages
 	const ipc = electron.ipcRenderer
 	//	System Dialog
-	const dialog = electron.remote.dialog 
+	const dialog = electron.remote.dialog
+
 // URLs testen
 const validUrl = require('valid-url');
 // Hashing
@@ -145,8 +146,8 @@ function mainLoginManager(){
 					title : "Unverschlüsselte Verbindung",
 					message : "Die Verbindung zum angegebenen Server ist nicht verschlüsselt, dadurch werden die Inhalte der Notizen nicht geschützt!",
 					buttons : ["Trotzdem anmelden", "Abbrechen"]
-				}, function ( num ) {
-					if( num == 0 ){
+				}).then(res => {
+					if( res.response === 0 ){
 						//Login
 						serverconnlogin();
 					}
@@ -233,7 +234,7 @@ function mainLoginManager(){
 		//using webview and authcode
 		var url = userdata.server + '/' + '#' + userdata.username + ':' + userdata.authcode;
 		openWebView( url, ( webview ) => {
-			webview.executeJavaScript( ' displayAsApp(); $("h1").hide(); ' );
+			webview.executeJavaScript( '{ displayAsApp(); $("h1").hide(); }' );
 		});
 	}
 
@@ -253,8 +254,8 @@ function deleteAuthCode(){
 			message : "Sie konnten nicht ausgeloggt werden, dies kann an einer fehlenden Internetverbindung oder an einem gelöschten Account auf dem Server liegen.",
 			detail : "Möchten Sie eingeloggt bleiben oder sich trotzdem neu anmelden, dies führt dazu, dass der Authentifikationslink auf dem Server gültig bleibt.",
 			buttons : ["Eingeloggt bleiben", "Neu anmelden"]
-		}, function ( num ) {
-			if( num == 1 ){
+		}).then(res => {
+			if( res.response === 1 ){
 				//Ausloggen
 				ipc.send( 'delete-userdata' );
 			}
