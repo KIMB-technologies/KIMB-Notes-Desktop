@@ -18,7 +18,6 @@ if [ "$TRAVIS_OS_NAME" = "linux" ]; then
 	zip -r -9 application/KIMB-Notes-Desktop-linux-x64.zip application/KIMB-Notes-Desktop-linux-x64
 
 fi;
-
 if [ "$TRAVIS_OS_NAME" = "osx" ]; then
 
 	npm run package-mac
