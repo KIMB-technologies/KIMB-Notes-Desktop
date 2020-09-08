@@ -50,7 +50,8 @@ function createWindow () {
 		webPreferences : {
 			nodeIntegration: true,
 			webviewTag: true,
-			enableRemoteModule : true
+			enableRemoteModule : true,
+			nativeWindowOpen: true
 		}
 	});
 
@@ -122,3 +123,4 @@ const {askForUserData, saveUserData, deleteUserData} = require(__dirname + '/js/
 ipc.on('delete-userdata', deleteUserData);
 ipc.on('ask-for-user-data', askForUserData);
 ipc.on('save-user-data', saveUserData);
+ipc.on('running-in-asar', () => { require( 'electron-is-running-in-asar' )() } )

@@ -38,7 +38,8 @@ function createWindow ( parent ) {
 		parent: parent,
 		webPreferences : {
 			nodeIntegration: true,
-			webviewTag: true
+			webviewTag: true,
+			enableRemoteModule : true
 		}
 	});
 
