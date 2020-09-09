@@ -116,16 +116,15 @@
 	 */
 	updateInfo(){
 		if( this.hasUpdate ){
-			var THIS = this;
 			this.electron.dialog.showMessageBox({
 				type : "info",
 				title : "Update verfügbar",
 				message : "Es ist eine neue Version von KIMB-Notes-Desktop verfügbar!",
 				buttons : ["Herunterladen", "Später"]
-			}, function ( num ) {
-				if( num == 0 ){
+			}).then(res => {
+				if( res.response === 0 ){
 					//Link aufrufen
-					THIS.electron.shell.openExternal( THIS.releases_url );
+					this.electron.shell.openExternal( this.releases_url );
 				}
 			});
 		}
