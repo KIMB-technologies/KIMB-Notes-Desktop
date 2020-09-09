@@ -1,10 +1,11 @@
 {
   "name": "KIMB-Notes-Desktop",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "A desktop application for KIMB-Notes Server.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron . --dev",
+    "start-production" : "electron .",
     "package-mac": "electron-packager ./  --ignore=node_modules/wine-darwin --platform=darwin --arch=x64 --asar --icon=./assets/icons/mac/notes.icns --prune=true --out=./application/",
     "create-dmg": "electron-installer-dmg ./application/KIMB-Notes-Desktop-darwin-x64/KIMB-Notes-Desktop.app KIMB-Notes-Desktop-mac-x64",
     "package-win": "electron-packager ./  --ignore=node_modules/wine-darwin --platform=win32 --arch=x64 --asar --icon=./assets/icons/win/notes.ico --prune=true --out=./application/",
@@ -26,7 +27,6 @@
   },
   "dependencies": {
     "about-window": "^1.13.2",
-    "electron-is-running-in-asar": "^1.0.0",
     "electron-json-storage": "^4.1.8",
     "electron-window-position": "latest",
     "jquery": "latest",

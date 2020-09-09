@@ -6,14 +6,20 @@ const shell = require('electron').shell;
  * @param {String} url URL, welche im WebView aufgerufen werden soll
  * @param {function (webview} donecallb (optional) Callback, welches nach fertig geladenem Webview aufgerufen wird
  */
-function openWebView( url, donecallb ){
+function openWebView( url, donecallb, openshare ){
 	//übergeordnetes zeigen
 	$( "div.webview" ).removeClass( 'disable' );
-
+	
 	if( $( "webview#mainWebview" ).length === 0 ){
+
+		var more = [
+			'enableremotemodule="false"',
+			openshare === true ? 'partition="share"' : 'partition="persist:account"',
+		]
+
 		//Webview erstellen
 		$( "div.webview" ).html(
-			'<webview src="' + url + '" id="mainWebview" useragent="KIMB-Notes-Desktop (using Electron, Chrome)"></webview>'
+			'<webview src="' + url + '" id="mainWebview" useragent="KIMB-Notes-Desktop (using Electron, Chrome)" '+ more.join(' ') +'></webview>'
 		);
 
 		//als Variable verfügbar machen

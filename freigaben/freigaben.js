@@ -10,6 +10,7 @@
 const electron = require('electron');
 //Bildschirm Position
 const BildschirmPosition = require( 'electron-window-position' );
+const config = require( __dirname + '/../js/config.js' );
 
 
 // ****
@@ -39,7 +40,8 @@ function createWindow ( parent ) {
 		webPreferences : {
 			nodeIntegration: true,
 			webviewTag: true,
-			enableRemoteModule : true
+			enableRemoteModule : true,
+			additionalArguments : [ config.devMode ? '--dev' : '' ]
 		}
 	});
 

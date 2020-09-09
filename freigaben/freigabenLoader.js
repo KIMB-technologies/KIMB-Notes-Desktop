@@ -98,12 +98,13 @@ function deleteFreigabe( time ){
 //Öffnen
 function openFreigabe( link ){
 	openWebView( link, ( webview ) => {
-		webview.executeJavaScript( '{ $("button#closenote").unbind("click").click( function () { window.open("file://dont-open/")  } ); }' );
+		webview.executeJavaScript( '{ if( !localStorage.hasOwnProperty("cookie") ) { localStorage.setItem("cookie", "allowed"); window.open("file://dont-open/"); } }' );
+		webview.executeJavaScript( '{ $("button#closenote").hide(); }' );
 		webview.executeJavaScript( '{ displayAsApp(); $("h1").hide(); }' );
 		webview.addEventListener('new-window', (event, url) => {
 			if( event.url == 'file://dont-open/' ){
-				location.reload();
+				webview.reload();
 			}
 		});
-	});
+	}, true);
 }
