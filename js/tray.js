@@ -4,7 +4,7 @@ const path = require('path');
 const {freigabenDialog} = require( __dirname + '/functions.js' );
 
 module.exports = function(mainWindow, quitok, createWindow) {
-	var iconpath = path.join( __dirname, '/../assets/icons/', ( process.platform === 'win32' ? 'win/notes.ico' : 'png/64x64.png' ) );
+	var iconpath = path.join( __dirname, '/../assets/icons/', ( process.platform === 'win32' ? 'win/notes.ico' : 'tray/icon.png' ) );
 	try {
 		var icon = nativeImage.createFromPath( iconpath );
 	} catch (error) {
